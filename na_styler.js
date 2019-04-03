@@ -20,52 +20,51 @@
       Returns a random integer from 0 up to size-1.
 
 */
-// DFUNC: function to be loaded when the page is loaded
+// DDOES: Loads the setStyles function when the page is loaded
 window.addEventListener('load', setStyles)
-
+// DFUNC: function to be loaded when the page is loaded
 function setStyles() {
-      // DVARL:
+      // DVARL: Local variables for the function
       var size = 5,
             styleNum = Math.floor((size) * Math.random()),
             styleSheet = document.createElement('link'),
             figBox = document.createElement('figure'),
             thumbStyles = document.createElement('style');
-      // DVARO:
+      // DVARO: Changes the stylesheet object by applying rel, id and href
       styleSheet.setAttribute('rel', "stylesheet");
       styleSheet.setAttribute('id', "fancySheet");
       styleSheet.setAttribute('href', `na_style_${styleNum}.css`);
-      // DDOES:
+      // DDOES: Appends the nodes to the document in the head tag
       document.head.appendChild(styleSheet);
       document.head.appendChild(thumbStyles);
-      // DVARO:
+      // DVARO: Changes the figbox id
       figBox.setAttribute('id', "styleThumbs");
+      // DDOES: Appends the figBox to the webp page
       document.getElementById('box').appendChild(figBox);
-      // DLOOP:
+      // DLOOP: Loops through and adds little images of the different style sheets for the user to click and change the page look.
       for (var i = 0; i < size; i++) {
-            // DVARO:
+            // DVARO: Create a node and chnges the src and alt attributes
             var sheetImg = document.createElement('img');
             sheetImg.setAttribute('src', `na_small_${i}.png`);
             sheetImg.setAttribute('alt', `${i}`);
-            // DDOES:
+            // DDOES: Applies event listerner that listen for the png are clicked on and the chanes the stylesheet to the apporiate stylesheet
             sheetImg.addEventListener('click', function (e) {
                   styleSheet.setAttribute('href', `na_style_${e.target.alt}.css`);
             });
-            // DDOES:
+            // DDOES: Applies the sheetImg to figBox
             figBox.appendChild(sheetImg);
       }
-      // DDOES:
+      // DDOES: Changes the document styleSheet and inserts style rules
       document.styleSheets[document.styleSheets.length - 1].insertRule("figure#styleThumbs { \
             position: absolute; \
             left: 0px; \
             bottom: 0px; \
       }", 0);
-      // DDOES:
       document.styleSheets[document.styleSheets.length - 1].insertRule("figure#styleThumbs img { \
             outline: 1px solid black; \
             cursor: pointer; \
             opacity: 0.75; \
       }", 1);
-      // DDOES:
       document.styleSheets[document.styleSheets.length - 1].insertRule("figure#styleThumbs img:hover { \
             outline: 1px solid red; \
             opacity: 1.0; \
